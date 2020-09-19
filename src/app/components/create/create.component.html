@@ -1,1 +1,95 @@
-<p>create works!</p>
+<mat-card class="main">
+  <form class="form" [formGroup]="form">
+    <mat-slide-toggle name="exist" formControlName="isExist">
+      <div *ngIf="form.get('isExist').value;else other_content">
+        Existing Customer
+      </div>
+      <ng-template #other_content>
+        New Customer
+      </ng-template>
+    </mat-slide-toggle>
+    <mat-form-field class="row" *ngIf="form.get('isExist').value">
+      <mat-label>CustomerId</mat-label>
+      <input matInput value="" formControlName="custID">
+    </mat-form-field>
+
+    <table class="row" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="row">
+            <span matPrefix>₹&nbsp;</span>
+            <span matSuffix>.00</span>
+            <mat-label>LoanAmount</mat-label>
+            <input matInput formControlName="loanAmount">
+            <mat-error *ngIf="!form.controls['loanAmount'].valid">{{getErrorMessage('loanAmount')}}</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="row">
+            <mat-label>Interest Rate</mat-label>
+            <input matInput formControlName="intrestRate">
+            <span matSuffix>%</span>
+            <mat-error *ngIf="!form.controls['intrestRate'].valid">{{getErrorMessage('intrestRate')}}</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+
+    <table class="row" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field color="accent" appearance="fill">
+            <mat-label>TradeDate</mat-label>
+            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" formControlName="tradeDate"
+              (dateChange)="tradeChange($event)">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field color="accent" appearance="fill">
+            <mat-label>LoanStartDate</mat-label>
+            <input matInput [min]="form.controls['tradeDate'].value" [max]="maxDate" [matDatepicker]="picker2"
+              formControlName="loanStartDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2 color="primary"></mat-datepicker>
+          </mat-form-field>
+        </td>
+      </tr>
+
+    </table>
+    <table class="full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="full-width">
+            <mat-label>Term</mat-label>
+            <input matInput placeholder="" value="" formControlName="term" (change)="onTermChangeEvent()">
+            <mat-error *ngIf="!form.controls['term'].valid">{{getErrorMessage('term')}}</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-radio-group name="term" aria-label="Select an option" formControlName="matric">
+            <mat-radio-button value="year">Years</mat-radio-button>
+            <mat-radio-button value="month">Months</mat-radio-button>
+          </mat-radio-group>
+        </td>
+      </tr>
+    </table>
+    <mat-form-field color="accent">
+      <mat-label>Maturity Date</mat-label>
+      <input matInput [matDatepicker]="picker3" formControlName="matureDate">
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3 color="primary"></mat-datepicker>
+    </mat-form-field>
+    <p>
+      <mat-label>Payment Frequency : </mat-label>
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="frequency">
+        <mat-button-toggle *ngFor="let item of frequency" [value]="item"> {{item}}</mat-button-toggle>
+      </mat-button-toggle-group>
+      <!-- {{selected}} -->
+    </p>
+    <div class="centre">
+      <button mat-raised-button color="primary">Approve</button>
+    </div>
+  </form>
+</mat-card>
