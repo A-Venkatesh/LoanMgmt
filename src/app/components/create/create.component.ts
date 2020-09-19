@@ -40,7 +40,7 @@ export class CreateComponent implements OnInit, AfterViewInit {
     isExist: [this.isExist],
     custID: [''],
     matric: ['month'],
-    matureDate: [{value: '', disabled: true}],
+    matureDate: [{ value: '', disabled: true }],
 
   });
 
@@ -48,7 +48,7 @@ export class CreateComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
 
-  ngAfterViewInit(): void{
+  ngAfterViewInit(): void {
     this.form.controls.loanStartDate.valueChanges.subscribe(
       () => {
         // console.log(this.frm1 .controls.family.value)
@@ -61,7 +61,7 @@ export class CreateComponent implements OnInit, AfterViewInit {
         this.onTermChangeEvent();
       }
     );
-          }
+  }
 
   getErrorMessage(filedName: string): string {
     switch (filedName) {
@@ -82,7 +82,7 @@ export class CreateComponent implements OnInit, AfterViewInit {
     this.form.controls.loanStartDate.setValue(this.getStartDate(event.value));
   }
   getStartDate(date): Date {
-    let startDate = new Date(date);
+    const startDate = new Date(date);
     return new Date(startDate.setDate(startDate.getDate() + 10));
   }
 
@@ -97,8 +97,8 @@ export class CreateComponent implements OnInit, AfterViewInit {
       console.log(startDate);
       this.form.controls.matureDate.setValue(startDate);
     } else {
-      console.log(typeof(no));
-      
+      console.log(typeof (no));
+
       startDate.setMonth(startDate.getMonth() + no);
       console.log(startDate);
       this.form.controls.matureDate.setValue(startDate);

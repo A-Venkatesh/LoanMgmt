@@ -4,7 +4,7 @@
 }
 
 .form {
-    margin: 0 auto;
+  margin: 0 auto;
   min-width: 150px;
   max-width: 500px;
   width: 100%;
@@ -20,33 +20,31 @@ td {
 
 
 mat-button-toggle-group {
-    margin-left: 12px;
-  }
+  margin-left: 12px;
+}
 
-  .cell4{
-    width: 30%;
-    padding: 0 5px; 
-    display: table-cell;
-  }
-  .cell2{
-    width: 20%;
-    padding: 0 5px; 
-    display: table-cell;
-  }
-  .row{
-    width: 100%;
-    margin: 0 auto; 
-  }
+.cell4 {
+  width: 30%;
+  padding: 0 5px;
+  display: table-cell;
+}
 
-  mat-radio-button{
-    margin-left: 12px;
-  }
+.cell2 {
+  width: 20%;
+  padding: 0 5px;
+  display: table-cell;
+}
 
-  .centre {
-    /* width: 200px; */
-    /* display: block; */
-    /* background-color: #eee; */
-    margin: auto;
-    text-align: center;
-    /* margin-right: auto; */
-  }
+.row {
+  width: 100%;
+  margin: 0 auto;
+}
+
+mat-radio-button {
+  margin-left: 12px;
+}
+
+.centre {
+  margin: auto;
+  text-align: center;
+}
