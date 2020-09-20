@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { LoanService } from 'src/app/services/loan.service';
 
 @Component({
   selector: 'app-create',
@@ -10,7 +11,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 export class CreateComponent implements OnInit, AfterViewInit {
   minDate: Date;
   maxDate: Date;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private ls: LoanService) {
     // const date = new Date();
     // console.log('from' + date);
     this.minDate = new Date();
@@ -103,5 +104,19 @@ export class CreateComponent implements OnInit, AfterViewInit {
       console.log(startDate);
       this.form.controls.matureDate.setValue(startDate);
     }
+  }
+
+
+  saveTutorial(data): void {
+
+    this.ls.create(data)
+      .subscribe(
+        response => {
+          console.log(response);
+          // this.submitted = true;
+        },
+        error => {
+          console.log(error);
+        });
   }
 }
