@@ -48,3 +48,16 @@ mat-radio-button {
   margin: auto;
   text-align: center;
 }
+
+mat-chip {
+  max-width: 170px;
+  font-size: 26px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.title {
+  width: 100%;
+  padding: 20px;
+ margin-left: 20%;
+}
