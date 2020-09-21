@@ -2,6 +2,8 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { LoanService } from 'src/app/services/loan.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-create',
@@ -11,7 +13,7 @@ import { LoanService } from 'src/app/services/loan.service';
 export class CreateComponent implements OnInit, AfterViewInit {
   minDate: Date;
   maxDate: Date;
-  constructor(private fb: FormBuilder, private ls: LoanService) {
+  constructor(private fb: FormBuilder, private ls: LoanService, private _snackBar: MatSnackBar) {
     // const date = new Date();
     // console.log('from' + date);
     this.minDate = new Date();
@@ -25,7 +27,7 @@ export class CreateComponent implements OnInit, AfterViewInit {
   }
 
   frequency: string[] = ['Monthly', 'Quarterly', 'Half Yearly', 'Yearly'];
-  selected = 'Quarterly';
+  selected = 'Monthly';
   isExist = true;
   // term = 'year';
   tradeDate = new Date();
@@ -34,7 +36,7 @@ export class CreateComponent implements OnInit, AfterViewInit {
 
     frequency: [this.selected, [Validators.required]],
     loanAmount: ['', [Validators.required, Validators.min(1), Validators.pattern('^\\d+$')]],
-    intrestRate: ['', [Validators.required, Validators.min(1), Validators.pattern('[+-]?([0-9]*[.])?[0-9]+')]],
+    intrestRate: ['', [Validators.required, Validators.min(1), Validators.max(100), Validators.pattern('[+-]?([0-9]*[.])?[0-9]+')]],
     tradeDate: [this.tradeDate, [Validators.required]],
     loanStartDate: [this.getStartDate(this.tradeDate)],
     term: ['', [Validators.required, Validators.min(1), Validators.pattern('^\\d+$')]],
@@ -106,8 +108,29 @@ export class CreateComponent implements OnInit, AfterViewInit {
     }
   }
 
+  openSnackBar(message: string, action: string): void {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 
-  saveTutorial(data): void {
+  onApproveClick(): void {
+    console.log('pom-------------------------');
+    if (this.form.valid) {
+      if (this.freqCheck()) {
+        console.log(this.form.value);
+        this.saveApplication(this.form.value);
+      } else {
+        this.openSnackBar('Invaild frequency', 'Change the payment frequency');
+      }
+     
+    } else {
+      console.log(this.form.value);
+
+      this.openSnackBar('Invaild form', 'Please fill the all required feilds');
+    }
+  }
+  saveApplication(data): void {
 
     this.ls.create(data)
       .subscribe(
@@ -118,5 +141,34 @@ export class CreateComponent implements OnInit, AfterViewInit {
         error => {
           console.log(error);
         });
+  }
+
+  freqCheck(): boolean {
+    let valid = true;
+    let no = Number(this.form.controls.term.value);
+    if (this.form.controls.matric.value === 'year') {
+      no = no * 12;
+    }
+    switch (this.form.controls.frequency.value) {
+      case 'Quarterly':
+        if ((no % 3) !== 0) {
+          valid = false;
+        }
+        break;
+      case 'Half Yearly':
+        if ((no % 6) !== 0) {
+          valid = false;
+        }
+        break;
+      case 'Yearly':
+        if ((no % 12) !== 0) {
+          valid = false;
+        }
+        break;
+      default:
+        break;
+    }
+
+    return valid;
   }
 }

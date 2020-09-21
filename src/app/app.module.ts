@@ -18,17 +18,20 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
+import { NoPageFoundComponent } from './components/no-page-found/no-page-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    NoPageFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSlideToggleModule,
     MatButtonModule,
     MatSelectModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule
