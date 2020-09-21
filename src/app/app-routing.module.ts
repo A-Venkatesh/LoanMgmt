@@ -8,7 +8,7 @@ import { CreateComponent } from './components/create/create.component';
 const routes: Routes = [
   { path: '', redirectTo: '/new', pathMatch: 'full' },
   { path: 'new', component: CreateComponent },
-  { path: 'sch', component: ScheduleComponent },
+  { path: 'sch/:id', component: ScheduleComponent },
   { path: '**', component: NoPageFoundComponent }
 ];
 

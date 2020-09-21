@@ -16,4 +16,8 @@ export class LoanService {
   create(data): Observable<any> {
     return this.http.post(baseUrl, data);
   }
+
+  get(data): Observable<any> {
+    return this.http.get(baseUrl, data);
+  }
 }

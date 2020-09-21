@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { LoanService } from 'src/app/services/loan.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class CreateComponent implements OnInit, AfterViewInit {
   minDate: Date;
   maxDate: Date;
-  constructor(private fb: FormBuilder, private ls: LoanService, private _snackBar: MatSnackBar) {
+  constructor(private fb: FormBuilder, private ls: LoanService, private _snackBar: MatSnackBar, private router: Router) {
     // const date = new Date();
     // console.log('from' + date);
     this.minDate = new Date();
@@ -135,6 +136,7 @@ export class CreateComponent implements OnInit, AfterViewInit {
     this.ls.create(data)
       .subscribe(
         response => {
+          this.router.navigate(['sch', response.custID]);
           console.log(response);
           // this.submitted = true;
         },
