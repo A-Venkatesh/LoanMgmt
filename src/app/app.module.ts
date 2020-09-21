@@ -28,13 +28,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { NoPageFoundComponent } from './components/no-page-found/no-page-found.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { LoanListComponent } from './components/loan-list/loan-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateComponent,
     ScheduleComponent,
-    NoPageFoundComponent
+    NoPageFoundComponent,
+    LoanListComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,8 @@ import { NoPageFoundComponent } from './components/no-page-found/no-page-found.c
     MatSnackBarModule,
     MatTableModule,
     MatTabsModule,
+    MatPaginatorModule,
+      
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule

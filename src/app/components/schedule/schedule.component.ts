@@ -41,4 +41,24 @@ export class ScheduleComponent implements OnInit {
 
   }
 
+
+  getStatus(date, status): any {
+
+    const today = new Date();
+    const payDate = new Date(date);
+    // console.log(payDate > today);
+    console.log(payDate >= today);
+    console.log((payDate >= today && status !== 'PAID'));
+    
+    console.log(today.toLocaleDateString());
+    console.log(payDate.toLocaleDateString());
+    if ((payDate <= today && status !== 'PAID')) {
+      status = 'AWAITINGPAYMENT';
+      console.log(status);
+      return status;
+    }
+
+    return status;
+  }
+
 }

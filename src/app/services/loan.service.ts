@@ -20,4 +20,7 @@ export class LoanService {
   get(): Observable<any> {
     return this.http.get(baseUrl);
   }
+  getLoans(): Observable<any> {
+    return this.http.get(baseUrl + '/get');
+  }
 }
