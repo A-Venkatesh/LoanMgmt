@@ -13,7 +13,7 @@ export class ScheduleComponent implements OnInit {
   intrestData = [];
   payData = [];
 
-  displayedColumns: string[] = ['position', 'paymentDate', 'startingBalance', 'paymentAmount', 'principal', 'projectedInterest', 'newBalance', 'paymentStatus', 'pay'];
+  displayedColumns: string[] = ['position', 'paymentDate', 'startingBalance', 'paymentAmount', 'principal', 'projectedInterest', 'newBalance', 'paymentStatus'];
   otherLoan: any;
 
   constructor(private route: ActivatedRoute, private ls: LoanService) { }
