@@ -21,7 +21,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
-
+import { MatChipsModule } from '@angular/material/chips';
+import { MatListModule } from '@angular/material/list';
 
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -59,7 +60,9 @@ import { LoanListComponent } from './components/loan-list/loan-list.component';
     MatTableModule,
     MatTabsModule,
     MatPaginatorModule,
-      
+    MatChipsModule,
+    MatListModule,
+    
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule

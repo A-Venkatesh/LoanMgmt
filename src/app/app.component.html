@@ -1,7 +1,9 @@
 <mat-toolbar color="primary">
   <span [routerLink]="['']">
     Loan System</span>
-
+    <span class="example-spacer"></span>
+    <button mat-raised-button color="accent" class="btn" [routerLink]="['/new']">New</button>
+    <button mat-raised-button color="accent" class="btn" [routerLink]="['/list']">Loan List</button>
 </mat-toolbar>
 <!-- <app-root></app-root> -->
 <router-outlet></router-outlet>

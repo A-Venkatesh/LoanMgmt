@@ -120,6 +120,11 @@ export class CreateComponent implements OnInit, AfterViewInit {
     if (this.form.valid) {
       if (this.freqCheck()) {
         console.log(this.form.value);
+        const data = this.form.value;
+        if (!data.isExist) {
+          data.custID = 0;
+        }
+        data.matureDate = this.form.controls.matureDate.value;
         this.saveApplication(this.form.value);
       } else {
         this.openSnackBar('Invaild frequency', 'Change the payment frequency');
@@ -136,7 +141,7 @@ export class CreateComponent implements OnInit, AfterViewInit {
     this.ls.create(data)
       .subscribe(
         response => {
-          this.router.navigate(['sch', response.loanID]);
+          // this.router.navigate(['sch', response.loanID]);
           console.log(response);
           // this.submitted = true;
         },

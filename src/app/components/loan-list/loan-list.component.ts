@@ -14,7 +14,7 @@ export interface Element {
 })
 export class LoanListComponent implements OnInit, AfterViewInit {
 
-  displayedColumns = ['custID','loanID','loanAmount','frequency','intrestRate','loanStartDate','term','tradeDate','matureDate'];
+  displayedColumns = ['custID','loanID','loanAmount','frequency','intrestRate','loanStartDate','term','tradeDate','matureDate', 'button'];
   tableData = new MatTableDataSource();
   expandedElement: Element | null;
   dataMap = new Map();

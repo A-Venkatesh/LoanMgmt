@@ -1,4 +1,33 @@
+<div class="title">
+    <mat-chip-list class="mat-chip-list-stacked" >
+        <mat-chip color="accent" selected>Payment Schedule</mat-chip>
+      </mat-chip-list>
+</div>
 
+
+  <table>
+    <tr>
+<td>
+    <p>
+        <mat-label> <h2>Customer ID : </h2> </mat-label>
+    <mat-label>
+      <h3>{{data.custID}}</h3> </mat-label>
+      </p>
+      <p>
+          <mat-label> <h2>Loan ID : </h2> </mat-label>
+      <mat-label>
+        <h3>{{id}}</h3> </mat-label>
+        </p>
+</td>
+<td>
+    <mat-list role="list" *ngIf="otherLoan.length > 1">
+    <h3>Other Loans of Customer : {{data.custID}}</h3>
+    <mat-list-item role="listitem" *ngFor="let item of otherLoan"> <h4>Loan ID :  <a [routerLink]="['/sch', item.loanID]">{{item.loanID}}</a></h4> 
+    </mat-list-item>
+      </mat-list>
+</td>
+    </tr>
+  </table>
 <mat-tab-group>
     <mat-tab label="Even Principal"> 
       

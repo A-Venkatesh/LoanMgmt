@@ -14,6 +14,7 @@ export class ScheduleComponent implements OnInit {
   payData = [];
 
   displayedColumns: string[] = ['position', 'paymentDate', 'startingBalance', 'paymentAmount', 'principal', 'projectedInterest', 'newBalance', 'paymentStatus'];
+  otherLoan: any;
 
   constructor(private route: ActivatedRoute, private ls: LoanService) { }
 
@@ -27,9 +28,11 @@ export class ScheduleComponent implements OnInit {
         response => {
           // this.router.navigate(['sch', response.loanID]);
           console.log(response);
+          const f = [];
 
           this.data = response.find(e => e.loanID === this.id);
-          console.log(this.data);
+          this.otherLoan = response.filter(e => e.custID === this.data.custID);
+          console.log(this.otherLoan);
           this.payData = this.data.evenPrincipal;
           this.intrestData = this.data.interestOnly;
           // this.submitted = true;

@@ -45,4 +45,16 @@ table {
   .example-element-description-attribution {
     opacity: 0.5;
   }
-  
+
+  mat-chip {
+    max-width: 150px;
+    font-size: 26px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .title{
+width: 100%;
+    padding: 20px;
+
+  }
