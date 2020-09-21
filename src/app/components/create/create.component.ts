@@ -15,22 +15,15 @@ export class CreateComponent implements OnInit, AfterViewInit {
   minDate: Date;
   maxDate: Date;
   constructor(private fb: FormBuilder, private ls: LoanService, private _snackBar: MatSnackBar, private router: Router) {
-    // const date = new Date();
-    // console.log('from' + date);
+
     this.minDate = new Date();
-    console.log('from' + this.minDate);
-    // date.setFullYear(date.getFullYear() + 80 , 20 , 1);
     this.maxDate = new Date();
-    console.log('to' + this.maxDate.getFullYear());
     this.maxDate.setFullYear(this.maxDate.getFullYear() + 100);
-    console.log('to' + this.maxDate);
-    // this.tradeDate = this.minDate;
   }
 
   frequency: string[] = ['Monthly', 'Quarterly', 'Half Yearly', 'Yearly'];
   selected = 'Monthly';
   isExist = true;
-  // term = 'year';
   tradeDate = new Date();
 
   form = this.fb.group({
@@ -55,13 +48,11 @@ export class CreateComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.form.controls.loanStartDate.valueChanges.subscribe(
       () => {
-        // console.log(this.frm1 .controls.family.value)
         this.onTermChangeEvent();
       }
     );
     this.form.controls.matric.valueChanges.subscribe(
       () => {
-        // console.log(this.frm1 .controls.family.value)
         this.onTermChangeEvent();
       }
     );
@@ -82,7 +73,6 @@ export class CreateComponent implements OnInit, AfterViewInit {
     }
   }
   tradeChange(event: MatDatepickerInputEvent<Date>): void {
-    console.log('log');
     this.form.controls.loanStartDate.setValue(this.getStartDate(event.value));
   }
   getStartDate(date): Date {
@@ -91,21 +81,21 @@ export class CreateComponent implements OnInit, AfterViewInit {
   }
 
   onTermChangeEvent(): void {
-    // console.log(event.target.value);
-    const no = Number(this.form.controls.term.value);
-    const startDate = new Date(this.form.controls.loanStartDate.value);
-    console.log(startDate);
-    console.log(this.form.controls.matric.value);
-    if (this.form.controls.matric.value === 'year') {
-      startDate.setFullYear(startDate.getFullYear() + no);
-      console.log(startDate);
-      this.form.controls.matureDate.setValue(startDate);
-    } else {
-      console.log(typeof (no));
 
-      startDate.setMonth(startDate.getMonth() + no);
-      console.log(startDate);
-      this.form.controls.matureDate.setValue(startDate);
+    try {
+      const no = Number(this.form.controls.term.value);
+      const startDate = new Date(this.form.controls.loanStartDate.value);
+      if (this.form.controls.matric.value === 'year') {
+        startDate.setFullYear(startDate.getFullYear() + no);
+        this.form.controls.matureDate.setValue(startDate);
+      } else {
+
+        startDate.setMonth(startDate.getMonth() + no);
+        this.form.controls.matureDate.setValue(startDate);
+      }
+    } catch (error) {
+      console.log(error);
+
     }
   }
 
@@ -116,10 +106,9 @@ export class CreateComponent implements OnInit, AfterViewInit {
   }
 
   onApproveClick(): void {
-    console.log('pom-------------------------');
+
     if (this.form.valid) {
       if (this.freqCheck()) {
-        console.log(this.form.value);
         const data = this.form.value;
         if (!data.isExist) {
           data.custID = 0;
@@ -129,10 +118,8 @@ export class CreateComponent implements OnInit, AfterViewInit {
       } else {
         this.openSnackBar('Invaild frequency', 'Change the payment frequency');
       }
-     
-    } else {
-      console.log(this.form.value);
 
+    } else {
       this.openSnackBar('Invaild form', 'Please fill the all required feilds');
     }
   }
@@ -142,8 +129,6 @@ export class CreateComponent implements OnInit, AfterViewInit {
       .subscribe(
         response => {
           this.router.navigate(['sch', response.loanID]);
-          console.log(response);
-          // this.submitted = true;
         },
         error => {
           console.log(error);

@@ -1,137 +1,143 @@
 <div class="title">
-    <mat-chip-list class="mat-chip-list-stacked" >
-        <mat-chip color="accent" selected>Payment Schedule</mat-chip>
-      </mat-chip-list>
+  <mat-chip-list class="mat-chip-list-stacked">
+    <mat-chip color="accent" selected>Payment Schedule</mat-chip>
+  </mat-chip-list>
 </div>
 
 
-  <table>
-    <tr>
-<td>
-    <p>
-        <mat-label> <h2>Customer ID : </h2> </mat-label>
-    <mat-label>
-      <h3>{{data.custID}}</h3> </mat-label>
+<table>
+  <tr>
+    <td>
+      <p>
+        <mat-label>
+          <h2>Customer ID : </h2>
+        </mat-label>
+        <mat-label>
+          <h3>{{data.custID}}</h3>
+        </mat-label>
       </p>
       <p>
-          <mat-label> <h2>Loan ID : </h2> </mat-label>
-      <mat-label>
-        <h3>{{id}}</h3> </mat-label>
-        </p>
-</td>
-<td>
-    <mat-list role="list" *ngIf="otherLoan.length > 1">
-    <h3>Other Loans of Customer : {{data.custID}}</h3>
-    <mat-list-item role="listitem" *ngFor="let item of otherLoan"> <h4>Loan ID :  <a [routerLink]="['/sch', item.loanID]">{{item.loanID}}</a></h4> 
-    </mat-list-item>
+        <mat-label>
+          <h2>Loan ID : </h2>
+        </mat-label>
+        <mat-label>
+          <h3>{{id}}</h3>
+        </mat-label>
+      </p>
+    </td>
+    <td>
+      <mat-list role="list" *ngIf="otherLoan.length > 1">
+        <h3>Other Loans of Customer : {{data.custID}}</h3>
+        <mat-list-item role="listitem" *ngFor="let item of otherLoan">
+          <h4>Loan ID : <a [routerLink]="['/sch', item.loanID]">{{item.loanID}}</a></h4>
+        </mat-list-item>
       </mat-list>
-</td>
-    </tr>
-  </table>
+    </td>
+  </tr>
+</table>
 <mat-tab-group>
-    <mat-tab label="Even Principal"> 
-      
-        <table mat-table [dataSource]="payData">
+  <mat-tab label="Even Principal">
+
+    <table mat-table [dataSource]="payData">
 
 
-            <ng-container matColumnDef="position">
-              <th mat-header-cell *matHeaderCellDef> No </th>
-              <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
-            </ng-container>
-          
-            <ng-container matColumnDef="paymentDate">
-              <th mat-header-cell *matHeaderCellDef> Date </th>
-              <td mat-cell *matCellDef="let element"> {{element.paymentDate | date: 'dd/MM/yyyy'}} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="startingBalance">
-              <th mat-header-cell *matHeaderCellDef> Debit </th>
-              <td mat-cell *matCellDef="let element"> {{ element.startingBalance | number : '.2-2'}} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="principal">
-              <th mat-header-cell *matHeaderCellDef> Principal </th>
-              <td mat-cell *matCellDef="let element"> {{element.principal | number : '.2-2'}} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="projectedInterest">
-              <th mat-header-cell *matHeaderCellDef> Projected Interest </th>
-              <td mat-cell *matCellDef="let element"> {{element.projectedInterest | number : '.2-2'}} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="paymentAmount">
-              <th mat-header-cell *matHeaderCellDef> PaymentAmount </th>
-              <td mat-cell *matCellDef="let element"> {{element.paymentAmount | number : '.2-2'}} </td>
-            </ng-container>
-            <ng-container matColumnDef="newBalance">
-              <th mat-header-cell *matHeaderCellDef> Balance on Payment </th>
-              <td mat-cell *matCellDef="let element"> {{element.newBalance | number : '.2-2'}} </td>
-            </ng-container>
-            <ng-container matColumnDef="paymentStatus">
-              <th mat-header-cell *matHeaderCellDef>Status</th>
-              <td mat-cell *matCellDef="let element"> {{getStatus(element.paymentDate, element.paymentStatus)}} </td>
-            </ng-container>
-            <!-- <ng-container matColumnDef="pay">
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No </th>
+        <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="paymentDate">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.paymentDate | date: 'dd/MM/yyyy'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="startingBalance">
+        <th mat-header-cell *matHeaderCellDef> Debit </th>
+        <td mat-cell *matCellDef="let element"> {{ element.startingBalance | number : '.2-2'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="principal">
+        <th mat-header-cell *matHeaderCellDef> Principal </th>
+        <td mat-cell *matCellDef="let element"> {{element.principal | number : '.2-2'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="projectedInterest">
+        <th mat-header-cell *matHeaderCellDef> Projected Interest </th>
+        <td mat-cell *matCellDef="let element"> {{element.projectedInterest | number : '.2-2'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="paymentAmount">
+        <th mat-header-cell *matHeaderCellDef> PaymentAmount </th>
+        <td mat-cell *matCellDef="let element"> {{element.paymentAmount | number : '.2-2'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="newBalance">
+        <th mat-header-cell *matHeaderCellDef> Balance on Payment </th>
+        <td mat-cell *matCellDef="let element"> {{element.newBalance | number : '.2-2'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="paymentStatus">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element"> {{getStatus(element.paymentDate, element.paymentStatus)}} </td>
+      </ng-container>
+      <!-- <ng-container matColumnDef="pay">
                 <th mat-header-cell *matHeaderCellDef>Status</th>
                 <td mat-cell *matCellDef="let element; let i = index"> 
                   <button mat-raised-button color="primary"  (click)="payLoan(i,'po')" >Pay</button>
                  </td>
               </ng-container> -->
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-    </mat-tab>
-    <mat-tab label="Interest Only">
-      
-        <table mat-table [dataSource]="intrestData">
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-tab>
+  <mat-tab label="Interest Only">
+
+    <table mat-table [dataSource]="intrestData">
 
 
-            <ng-container matColumnDef="position">
-              <th mat-header-cell *matHeaderCellDef> No </th>
-              <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
-            </ng-container>
-          
-            <ng-container matColumnDef="paymentDate">
-              <th mat-header-cell *matHeaderCellDef> Date </th>
-              <td mat-cell *matCellDef="let element"> {{element.paymentDate | date: 'dd/MM/yyyy'}} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="startingBalance">
-              <th mat-header-cell *matHeaderCellDef> Debit </th>
-              <td mat-cell *matCellDef="let element"> {{ element.startingBalance | number : '.2-2'}} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="principal">
-              <th mat-header-cell *matHeaderCellDef> Principal </th>
-              <td mat-cell *matCellDef="let element"> {{element.principal | number : '.2-2'}} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="projectedInterest">
-              <th mat-header-cell *matHeaderCellDef> Projected Interest </th>
-              <td mat-cell *matCellDef="let element"> {{element.projectedInterest | number : '.2-2'}} </td>
-            </ng-container>
-          
-            <ng-container matColumnDef="paymentAmount">
-              <th mat-header-cell *matHeaderCellDef> PaymentAmount </th>
-              <td mat-cell *matCellDef="let element"> {{element.paymentAmount | number : '.2-2'}} </td>
-            </ng-container>
-            <ng-container matColumnDef="newBalance">
-              <th mat-header-cell *matHeaderCellDef> Balance on Payment </th>
-              <td mat-cell *matCellDef="let element"> {{element.newBalance | number : '.2-2'}} </td>
-            </ng-container>
-            <ng-container matColumnDef="paymentStatus">
-              <th mat-header-cell *matHeaderCellDef>Status</th>
-              <td mat-cell *matCellDef="let element"> {{getStatus(element.paymentDate, element.paymentStatus)}} </td>
-            </ng-container>
-            <!-- <ng-container matColumnDef="pay">
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No </th>
+        <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="paymentDate">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.paymentDate | date: 'dd/MM/yyyy'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="startingBalance">
+        <th mat-header-cell *matHeaderCellDef> Debit </th>
+        <td mat-cell *matCellDef="let element"> {{ element.startingBalance | number : '.2-2'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="principal">
+        <th mat-header-cell *matHeaderCellDef> Principal </th>
+        <td mat-cell *matCellDef="let element"> {{element.principal | number : '.2-2'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="projectedInterest">
+        <th mat-header-cell *matHeaderCellDef> Projected Interest </th>
+        <td mat-cell *matCellDef="let element"> {{element.projectedInterest | number : '.2-2'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="paymentAmount">
+        <th mat-header-cell *matHeaderCellDef> PaymentAmount </th>
+        <td mat-cell *matCellDef="let element"> {{element.paymentAmount | number : '.2-2'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="newBalance">
+        <th mat-header-cell *matHeaderCellDef> Balance on Payment </th>
+        <td mat-cell *matCellDef="let element"> {{element.newBalance | number : '.2-2'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="paymentStatus">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element"> {{getStatus(element.paymentDate, element.paymentStatus)}} </td>
+      </ng-container>
+      <!-- <ng-container matColumnDef="pay">
                 <th mat-header-cell *matHeaderCellDef>Status</th>
                 <td mat-cell *matCellDef="let element; let i = index"> 
                   <button mat-raised-button color="primary"  (click)="payLoan(i,'po')" >Pay</button>
                  </td>
               </ng-container> -->
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-    </mat-tab>
-  </mat-tab-group>
-
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-tab>
+</mat-tab-group>

@@ -9,9 +9,6 @@ const baseUrl = 'http://localhost:8080/loan';
 export class LoanService {
 
   constructor(private http: HttpClient) { }
-  // httpHeaders: HttpHeaders = new HttpHeaders({
-  //   Authorization: '822042677'
-  // });
 
   create(data): Observable<any> {
     return this.http.post(baseUrl, data);
@@ -25,5 +22,5 @@ export class LoanService {
   }
   pay(index, code): Observable<any> {
     return this.http.post(baseUrl + '/pay', code + '|' + index);
-   }
+  }
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { LoanService } from 'src/app/services/loan.service';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 export interface Element {
   id: string;
   data: Array<any>;
@@ -14,7 +14,7 @@ export interface Element {
 })
 export class LoanListComponent implements OnInit, AfterViewInit {
 
-  displayedColumns = ['custID','loanID','loanAmount','frequency','intrestRate','loanStartDate','term','tradeDate','matureDate', 'button'];
+  displayedColumns = ['custID', 'loanID', 'loanAmount', 'frequency', 'intrestRate', 'loanStartDate', 'term', 'tradeDate', 'matureDate', 'button'];
   tableData = new MatTableDataSource();
   expandedElement: Element | null;
   dataMap = new Map();
@@ -24,7 +24,7 @@ export class LoanListComponent implements OnInit, AfterViewInit {
   constructor(private ls: LoanService) { }
 
   ngOnInit(): void {
-this.ls.getLoans().subscribe(
+    this.ls.getLoans().subscribe(
       response => {
         this.tableData = new MatTableDataSource(response);
         this.ngAfterViewInit();
@@ -37,7 +37,7 @@ this.ls.getLoans().subscribe(
     this.tableData.paginator = this.paginator;
     this.tableData.sort = this.sort;
   }
-  
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

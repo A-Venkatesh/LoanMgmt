@@ -22,20 +22,17 @@ export class ScheduleComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.id = params.id;
-      console.log(this.id);
-      // this.setData();
       let obj = this.ls.get().subscribe(
         response => {
-          // this.router.navigate(['sch', response.loanID]);
-          console.log(response);
+
           const f = [];
 
           this.data = response.find(e => e.loanID === this.id);
           this.otherLoan = response.filter(e => e.custID === this.data.custID);
-          console.log(this.otherLoan);
+
           this.payData = this.data.evenPrincipal;
           this.intrestData = this.data.interestOnly;
-          // this.submitted = true;
+
         },
         error => {
           console.log(error);
@@ -49,15 +46,8 @@ export class ScheduleComponent implements OnInit {
 
     const today = new Date();
     const payDate = new Date(date);
-    // console.log(payDate > today);
-    // console.log(payDate >= today);
-    // console.log((payDate >= today && status !== 'PAID'));
-    
-    // console.log(today.toLocaleDateString());
-    // console.log(payDate.toLocaleDateString());
     if ((payDate <= today && status !== 'PAID')) {
       status = 'AWAITINGPAYMENT';
-      console.log(status);
       return status;
     }
 
@@ -65,18 +55,16 @@ export class ScheduleComponent implements OnInit {
   }
 
   payLoan(index, code): void {
-    console.log('' + index);
-    
+
     this.ls.pay(index, code).subscribe(
       response => {
-        // this.router.navigate(['sch', response.loanID]);
         console.log(response);
-        // this.submitted = true;
+
       },
       error => {
         console.log(error);
       });
 
-   }
+  }
 
 }
