@@ -9,8 +9,11 @@ import { LoanService } from 'src/app/services/loan.service';
 })
 export class ScheduleComponent implements OnInit {
   id: any;
+  data: any;
   intrestData = [];
   payData = [];
+
+  displayedColumns: string[] = ['position', 'paymentDate', 'startingBalance', 'paymentAmount', 'principal', 'projectedInterest', 'newBalance', 'paymentStatus'];
 
   constructor(private route: ActivatedRoute, private ls: LoanService) { }
 
@@ -20,10 +23,15 @@ export class ScheduleComponent implements OnInit {
       this.id = params.id;
       console.log(this.id);
       // this.setData();
-      let obj = this.ls.get(this.id).subscribe(
+      let obj = this.ls.get().subscribe(
         response => {
           // this.router.navigate(['sch', response.loanID]);
           console.log(response);
+
+          this.data = response.find(e => e.loanID === this.id);
+          console.log(this.data);
+          this.payData = this.data.evenPrincipal;
+          this.intrestData = this.data.interestOnly;
           // this.submitted = true;
         },
         error => {

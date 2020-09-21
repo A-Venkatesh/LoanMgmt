@@ -18,7 +18,10 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+
 
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -50,6 +53,8 @@ import { NoPageFoundComponent } from './components/no-page-found/no-page-found.c
     MatButtonModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatTableModule,
+    MatTabsModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule
