@@ -13,7 +13,7 @@ export class ScheduleComponent implements OnInit {
   intrestData = [];
   payData = [];
 
-  displayedColumns: string[] = ['position', 'paymentDate', 'startingBalance', 'paymentAmount', 'principal', 'projectedInterest', 'newBalance', 'paymentStatus'];
+  displayedColumns: string[] = ['position', 'paymentDate', 'startingBalance', 'paymentAmount', 'principal', 'projectedInterest', 'newBalance', 'paymentStatus', 'pay'];
   otherLoan: any;
 
   constructor(private route: ActivatedRoute, private ls: LoanService) { }
@@ -50,11 +50,11 @@ export class ScheduleComponent implements OnInit {
     const today = new Date();
     const payDate = new Date(date);
     // console.log(payDate > today);
-    console.log(payDate >= today);
-    console.log((payDate >= today && status !== 'PAID'));
+    // console.log(payDate >= today);
+    // console.log((payDate >= today && status !== 'PAID'));
     
-    console.log(today.toLocaleDateString());
-    console.log(payDate.toLocaleDateString());
+    // console.log(today.toLocaleDateString());
+    // console.log(payDate.toLocaleDateString());
     if ((payDate <= today && status !== 'PAID')) {
       status = 'AWAITINGPAYMENT';
       console.log(status);
@@ -63,5 +63,20 @@ export class ScheduleComponent implements OnInit {
 
     return status;
   }
+
+  payLoan(index, code): void {
+    console.log('' + index);
+    
+    this.ls.pay(index, code).subscribe(
+      response => {
+        // this.router.navigate(['sch', response.loanID]);
+        console.log(response);
+        // this.submitted = true;
+      },
+      error => {
+        console.log(error);
+      });
+
+   }
 
 }

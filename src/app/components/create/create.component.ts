@@ -141,7 +141,7 @@ export class CreateComponent implements OnInit, AfterViewInit {
     this.ls.create(data)
       .subscribe(
         response => {
-          // this.router.navigate(['sch', response.loanID]);
+          this.router.navigate(['sch', response.loanID]);
           console.log(response);
           // this.submitted = true;
         },

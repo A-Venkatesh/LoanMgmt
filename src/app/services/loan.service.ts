@@ -23,4 +23,7 @@ export class LoanService {
   getLoans(): Observable<any> {
     return this.http.get(baseUrl + '/get');
   }
+  pay(index, code): Observable<any> {
+    return this.http.post(baseUrl + '/pay', code + '|' + index);
+   }
 }
