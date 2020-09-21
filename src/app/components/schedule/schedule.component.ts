@@ -9,6 +9,8 @@ import { LoanService } from 'src/app/services/loan.service';
 })
 export class ScheduleComponent implements OnInit {
   id: any;
+  intrestData = [];
+  payData = [];
 
   constructor(private route: ActivatedRoute, private ls: LoanService) { }
 
@@ -18,7 +20,15 @@ export class ScheduleComponent implements OnInit {
       this.id = params.id;
       console.log(this.id);
       // this.setData();
-      this.ls.get(this.id);
+      let obj = this.ls.get(this.id).subscribe(
+        response => {
+          // this.router.navigate(['sch', response.loanID]);
+          console.log(response);
+          // this.submitted = true;
+        },
+        error => {
+          console.log(error);
+        });
     });
 
   }
