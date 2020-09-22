@@ -7,7 +7,7 @@ import { CreateComponent } from './components/create/create.component';
 import { LoanListComponent } from './components/loan-list/loan-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/list', pathMatch: 'full' },
+  { path: '', redirectTo: '/new', pathMatch: 'full' },
   { path: 'new', component: CreateComponent },
   { path: 'sch/:id', component: ScheduleComponent },
   { path: 'list', component: LoanListComponent },
